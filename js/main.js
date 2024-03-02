@@ -23,9 +23,7 @@ function continue_game() {
 function displayColor() {
   let t = setInterval(
     function () {
-      console.log(times);
-      game_order[times].classList.remove("inactive");
-      console.log(game_order[times]);
+      game_order[times].classList.remove("inactive")
       setTimeout(() => {
         game_order[times].classList.add("inactive");
         times++;
@@ -73,6 +71,7 @@ function input_check() {
 }
 function stop() {
   user_input = [];
+  game_order = [];
   count = 0;
   levels = 1;
   times = 0;

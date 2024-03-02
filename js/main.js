@@ -8,30 +8,37 @@ window.onload = function () {
 };
 function startgame() {
   red.parentNode.classList.remove("unclickable");
+  play.classList.add("inactive");
   continue_game();
 }
 function continue_game() {
+  times = 0;
   for (let i = 0; i < levels; i++) {
-    let random = Math.floor(Math.random() * 4);
+    let random = Math.floor(Math.random() * 3);
     game_order.push(colors[random]);
-    setTimeout(
-      () => {
-        game_order[i].classList.remove("inactive");
-        console.log(game_order[i]);
-        setTimeout(
-          (i) => {
-            game_order[i].classList.add("inactive");
-            return;
-          },
-          pace / 2,
-          i
-        );
-      },
-      pace,
-      i
-    );
   }
+  displayColor();
 }
+
+function displayColor() {
+  let t = setInterval(
+    function () {
+      console.log(times);
+      game_order[times].classList.remove("inactive");
+      console.log(game_order[times]);
+      setTimeout(() => {
+        game_order[times].classList.add("inactive");
+        times++;
+        if (times == levels) {
+            clearInterval(t);
+          }
+      }, pace);
+      
+    },
+    pace * 1.5,
+  );
+}
+
 function button_input(choice) {
   user_input.push(choice);
   count += 1;
@@ -54,22 +61,7 @@ function input_check() {
     StartScore++;
     document.getElementById("level").textContent = StartScore;
     if (StartScore == 12) {
-      let win = document.createElement("div");
-      win.style.position = "fixed";
-      win.style.top = "400px";
-      win.style.fontFamily = "Poppins";
-      win.style.backgroundColor = " #6f7cf5";
-      win.style.border = "10px solid white";
-      win.style.borderRadius = "10px";
-      win.style.marginLeft = "420px";
-      win.style.padding = "10px";
-      win.id = "winner";
-      win.innerHTML = '<h1> YOU WIN!!!! </h1>';
-      document.body.appendChild(win);
-      setTimeout(() => {
-       document.getElementById("winner").remove(); 
-       stop();        
-      }, 5000);
+      stop();
     }
     if (parseInt(highscore.textContent) < StartScore) {
       highscore.textContent = StartScore;
@@ -83,7 +75,9 @@ function stop() {
   user_input = [];
   count = 0;
   levels = 1;
+  times = 0;
   StartScore = 0;
+  play.classList.remove("inactive");
   document.getElementById("level").textContent = StartScore;
   red.parentNode.classList.add("unclickable");
   sessionStorage.setItem("highscore", highscore.textContent);
@@ -93,6 +87,7 @@ let pace = 1000;
 let game_order = [];
 let user_input = [];
 let levels = 1;
+let times = 0;
 let count = 0;
 let highscore = document.getElementById("high-score");
 

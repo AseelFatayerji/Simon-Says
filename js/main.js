@@ -1,3 +1,38 @@
+let pace = 1000;
+let game_order = [];
+let user_input = [];
+let levels = 1;
+let times = 0;
+let count = 0;
+let highscore = document.getElementById("high-score");
+
+let StartScore = 0;
+let play = document.getElementById("play");
+
+let red = document.querySelector('[data-tile="red"]');
+let blue = document.querySelector('[data-tile="blue"]');
+let green = document.querySelector('[data-tile="green"]');
+let yellow = document.querySelector('[data-tile="yellow"]');
+
+let colors = [red, blue, green, yellow];
+
+play.onclick = function () {
+  startgame();
+};
+red.onclick = function () {
+  button_input(this);
+};
+blue.onclick = function () {
+  button_input(this);
+};
+green.onclick = function () {
+  button_input(this);
+};
+yellow.onclick = function () {
+  button_input(this);
+};
+
+
 window.onload = function () {
   if (sessionStorage.getItem("highscore") == null) {
     count = 0;
@@ -82,36 +117,3 @@ function stop() {
   sessionStorage.setItem("highscore", highscore.textContent);
 }
 
-let pace = 1000;
-let game_order = [];
-let user_input = [];
-let levels = 1;
-let times = 0;
-let count = 0;
-let highscore = document.getElementById("high-score");
-
-let StartScore = 0;
-let play = document.getElementById("play");
-
-let red = document.querySelector('[data-tile="red"]');
-let blue = document.querySelector('[data-tile="blue"]');
-let green = document.querySelector('[data-tile="green"]');
-let yellow = document.querySelector('[data-tile="yellow"]');
-
-let colors = [red, blue, green, yellow];
-
-play.onclick = function () {
-  startgame();
-};
-red.onclick = function () {
-  button_input(this);
-};
-blue.onclick = function () {
-  button_input(this);
-};
-green.onclick = function () {
-  button_input(this);
-};
-yellow.onclick = function () {
-  button_input(this);
-};
